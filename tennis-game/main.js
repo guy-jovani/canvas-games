@@ -10,8 +10,6 @@ const ballRadius = 5;
 const rightPaddleSpeed = 10 ;
 
 const drawBoard = () => {
-  canvas.width = window.innerWidth * 0.9;
-  canvas.height = window.innerHeight * 0.7;
   ctx.fillStyle = 'black';
   ctx.fillRect(0, 0, canvas.width, canvas.height);
   
@@ -103,10 +101,6 @@ const moveBall = () => {
   ballY += ballSpeedY;
 };
 
-const moveParts = () => {
-  moveBall();
-};
-
 const drawGame = () => {
   drawBoard();
   drawBall();
@@ -120,6 +114,10 @@ const playGame = () => {
   moveBall();
 };
 
+const resizeBoard = () => {
+  canvas.width = window.innerWidth * 0.9;
+  canvas.height = window.innerHeight * 0.7;
+};
 
 window.onload = () => {
   canvas = document.getElementById('gameCanvas');
@@ -127,6 +125,7 @@ window.onload = () => {
   paddleLeftY = canvas.height / 2 - paddleHeight / 2;
   paddleRightY = canvas.height / 2 - paddleHeight / 2;
   resetBall();
+  resizeBoard();
 
   document.addEventListener('mousemove', (event) => {
     const mousePos = getMousePos(event);
@@ -136,3 +135,7 @@ window.onload = () => {
   const framePerSec = 30;
   setInterval(playGame, 1000 / framePerSec);
 }
+
+
+
+window.onresize = resizeBoard;
